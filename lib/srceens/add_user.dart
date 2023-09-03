@@ -40,6 +40,8 @@ class _UserFormState extends State<UserForm> {
               fnameInputField(),
               emailInputField(),
               passwordInputField(),
+              accInputField(),
+              addInputField(),
               genderFormInput(),
               SizedBox(height: 10.0),
               submitButton(),
