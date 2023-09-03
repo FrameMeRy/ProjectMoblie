@@ -16,8 +16,8 @@ class MainApp extends StatelessWidget {
       title: 'User CRUD',
       initialRoute: '/',
       routes: {
-        '/': (context) => const Home(),
-        '/login': (context) => const LoginForm(),
+        '/': (context) =>  const Home(),
+        '/login': (context) =>  const Login(),
 
       },
     );
