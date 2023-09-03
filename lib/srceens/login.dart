@@ -6,7 +6,6 @@ import 'home.dart';
 import 'add_user.dart';
 import 'package:email_validator/email_validator.dart';
 
-
 class Login extends StatefulWidget {
   static const routeName = "/login";
   const Login({super.key});
@@ -51,47 +50,60 @@ class _LoginState extends State<Login> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        margin: EdgeInsets.all(10.0),
-        child: Form(
-            key: _formkey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                textHeader("Login"),
-                emailInputField(),
-                passwordInputField(),
-                SizedBox(
-                  height: 10.0,
+        body: Container(
+            color: Colors.white, // ตั้งค่าสีพื้นหลังของ Container เป็นสีขาว
+            child: Stack(children: [
+              Positioned.fill(
+                child: ColorFiltered(
+                  colorFilter: ColorFilter.mode(
+                    Colors.black.withOpacity(0.5), // ปรับระดับของความจางในนี้
+                    BlendMode.dstATop,
+                  ),
+                  child: Image.network(
+                    "https://wallpapercave.com/wp/wp3359189.jpg?fbclid=IwAR1vQ6KDiq12SlGrd_Vpn8EhzZqLnDoMieI35cBfQZ7j6rrRFl8e4d7MX0Q",
+                    fit: BoxFit.cover,
+                  ),
                 ),
-                Row(
-                  children: [
-                    submitButton(),
-                    SizedBox(
-                      width: 10.0,
-                    ),
-                    backButton(),
-                    SizedBox(
-                      width: 10.0,
-                    ),
-                    registerlink()
-                  ],
-                ),
-              ],
-            )),
-      ),
-    );
+              ),
+              Container(
+                margin: EdgeInsets.all(10.0),
+                child: Form(
+                    key: _formkey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        textHeader("Login"),
+                        emailInputField(),
+                        passwordInputField(),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        Row(
+                          children: [
+                            submitButton(),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            backButton(),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            registerlink()
+                          ],
+                        ),
+                      ],
+                    )),
+              ),
+            ])));
   }
 
   Widget fnameInputField() {
     return TextFormField(
       initialValue: "Ratchanon Chukiattakerng",
       decoration:
-          InputDecoration(
-            labelText: "Fullname", 
-            icon: Icon(Icons.person)),
-      validator: (value){
-        if (value!.isEmpty){
+          InputDecoration(labelText: "Fullname", icon: Icon(Icons.person)),
+      validator: (value) {
+        if (value!.isEmpty) {
           return "This field is required";
         }
         return null;
@@ -148,27 +160,19 @@ class _LoginState extends State<Login> {
   Widget backButton() {
     return ElevatedButton(
       onPressed: () {
-         Navigator.pushNamed(context, Home.routeName);
+        Navigator.pushNamed(context, Home.routeName);
       },
       child: Text("back"),
     );
   }
 
- 
-
   Widget registerlink() {
     return InkWell(
       child: const Text("Sigh Up"),
       onTap: () {
-         Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => UserForm()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => UserForm()));
       },
     );
   }
 }
-
-
-
-

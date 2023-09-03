@@ -64,6 +64,7 @@ class _UserFormState extends State<UserForm> {
     return;
   }
 
+
   Widget fnameInputField() {
     return TextFormField(
       initialValue: user.name,
@@ -80,6 +81,7 @@ class _UserFormState extends State<UserForm> {
       onSaved: (newValue) => user.name = newValue,
     );
   }
+
 
   Widget emailInputField() {
     return TextFormField(

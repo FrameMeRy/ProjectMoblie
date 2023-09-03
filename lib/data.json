@@ -9,6 +9,33 @@
         "address":"123/456 Bangkok Thailand",
         "gender" : "Male"
     }
-    
+  ],
+  "product": [
+    {
+        "id": 1,
+        "namep": "Tyrannosauras",
+        "detailp": "เป็นไดโนเสาร์ที่ดุร้าย กินเนื้อเป็นอาหาร",
+        "pricep": "39000",
+        "amountp": "10"
+    }
+  ],
+  "cart": [
+    {
+        "id": 1,
+        "namec": "Tyrannosauras",
+        "pricec": "39000",
+        "amountc": "2"
+    }
+  ],
+  "pay": [
+    {
+        "id": 1,
+        "namepa": "Tyrannosauras",
+        "pricepa": "39000",
+        "amountpa": "2",
+        "addressp": "123/456 Bangkok Thailand",
+        "delivery_fee" : "5"
+    }
   ]
+  
 }
