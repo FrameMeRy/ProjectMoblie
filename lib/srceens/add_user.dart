@@ -82,12 +82,12 @@ class _UserFormState extends State<UserForm> {
     );
   }
 
-  Widget fnameInputField() {
+  Widget accInputField() {
     return TextFormField(
-      initialValue: user.name,
+      initialValue: user.accnumber,
       decoration: InputDecoration(
-        labelText: 'Full name',
-        icon: Icon(Icons.person),
+        labelText: 'Account number',
+        icon: Icon(Icons.account_balance),
       ),
       validator: (value) {
         if (value == null || value.isEmpty) {
@@ -95,9 +95,28 @@ class _UserFormState extends State<UserForm> {
         }
         return null;
       },
-      onSaved: (newValue) => user.name = newValue,
+      onSaved: (newValue) => user.accnumber = newValue,
     );
   }
+
+  Widget addInputField() {
+    return TextFormField(
+      initialValue: user.address,
+      decoration: InputDecoration(
+        labelText: 'Address',
+        icon: Icon(Icons.home),
+      ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'This field is required';
+        }
+        return null;
+      },
+      onSaved: (newValue) => user.address = newValue,
+    );
+  }
+
+  
 
 
   Widget emailInputField() {
