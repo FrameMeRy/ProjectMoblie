@@ -20,7 +20,7 @@ class _LoginState extends State<Login> {
   Users user = Users();
 
   Future<void> login(Users user) async {
-    var params = {"email": user.email, "password": user.password};
+    var params = {"email": user.name, "password": user.password};
     var url = Uri.http(Configure.server, "users", params);
     var resp = await http.get(url);
     print(resp.body);
@@ -112,7 +112,7 @@ class _LoginState extends State<Login> {
         }
         return null;
       },
-      onSaved: (newValue) => user.email = newValue,
+      onSaved: (newValue) => user.name = newValue,
     );
   }
 
@@ -147,7 +147,9 @@ class _LoginState extends State<Login> {
 
   Widget backButton() {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+         Navigator.pushNamed(context, Home.routeName);
+      },
       child: Text("back"),
     );
   }

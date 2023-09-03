@@ -59,8 +59,8 @@ class _HomeState extends State<Home> {
           key: UniqueKey(),
           child: Card(
             child: ListTile(
-              title: Text("${user.fullname}"),
-              subtitle: Text("${user.email}"),
+              title: Text("${user.name}"),
+              subtitle: Text("${user.user}"),
               onTap: () {
                 Navigator.push(
                     context,
@@ -116,19 +116,7 @@ class _HomeState extends State<Home> {
       ),
       drawer: SideMenu(),
       body: mainBody,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async{
-          String result = await 
-           Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => UserForm()));
-          if( result == "refresh"){
-            getUsers();
-          }
-        },
-        child: const Icon(Icons.person_add_alt_1),
-      ),
+      
     );
   }
 }
@@ -146,8 +134,8 @@ class SideMenu extends StatelessWidget {
     Users user = Configure.login;
 
     if (user.id != null) {
-      accountName = user.fullname!;
-      accountEmail = user.email!;
+      accountName = user.name!;
+      accountEmail = user.user!;
     }
     return Drawer(
       child: Column(

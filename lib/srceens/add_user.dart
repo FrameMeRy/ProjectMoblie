@@ -22,7 +22,7 @@ class _UserFormState extends State<UserForm> {
   Widget build(BuildContext context) {
     try{
       user = ModalRoute.of(context)!.settings.arguments as Users;
-      print(user.fullname);
+      print(user.name);
     } catch (e){
       user = Users();
     }
@@ -66,7 +66,7 @@ class _UserFormState extends State<UserForm> {
 
   Widget fnameInputField() {
     return TextFormField(
-      initialValue: user.fullname,
+      initialValue: user.name,
       decoration: InputDecoration(
         labelText: 'Full name',
         icon: Icon(Icons.person),
@@ -77,13 +77,13 @@ class _UserFormState extends State<UserForm> {
         }
         return null;
       },
-      onSaved: (newValue) => user.fullname = newValue,
+      onSaved: (newValue) => user.name = newValue,
     );
   }
 
   Widget emailInputField() {
     return TextFormField(
-      initialValue: user.email,
+      initialValue: user.user,
       decoration: InputDecoration(
         labelText: 'Email',
         icon: Icon(Icons.email),
@@ -94,7 +94,7 @@ class _UserFormState extends State<UserForm> {
         }
         return null;
       },
-      onSaved: (newValue) => user.email = newValue,
+      onSaved: (newValue) => user.user = newValue,
     );
   }
 
