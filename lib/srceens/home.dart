@@ -26,29 +26,29 @@ class _HomeState extends State<Home> {
     });
     return;
   }
-  
-  Future<void> removeUsers(user) async{
+
+  Future<void> removeUsers(user) async {
     var url = Uri.http(Configure.server, "users/${user.id}");
     var resp = await http.delete(url);
     print(resp.body);
     return;
   }
 
-  Future<void> addNewUser(user) async{
+  Future<void> addNewUser(user) async {
     var url = Uri.http(Configure.server, "users");
     var resp = await http.post(url,
-        headers: <String, String>{ 'Content-Type': 'application/json; charset=UTF-8',
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(user.toJson()));
     var rs = usersFromJson("[${resp.body}]");
 
-    if (rs.length == 1){
+    if (rs.length == 1) {
       Navigator.pop(context);
     }
     return;
   }
 
-  
   Widget showUsers() {
     return ListView.builder(
       itemCount: _userList.length,
@@ -69,15 +69,14 @@ class _HomeState extends State<Home> {
               },
               trailing: IconButton(
                 onPressed: () async {
-                  String result = await 
-                  Navigator.push(
+                  String result = await Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => UserForm(),
                           settings: RouteSettings(arguments: user)));
-                      if (result == "refresh"){
-                        getUsers();
-                      }
+                  if (result == "refresh") {
+                    getUsers();
+                  }
                 },
                 icon: Icon(Icons.edit),
               ),
@@ -115,7 +114,16 @@ class _HomeState extends State<Home> {
       ),
       drawer: SideMenu(),
       body: mainBody,
-      
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          String result = await Navigator.push(
+              context, MaterialPageRoute(builder: (context) => UserForm()));
+          if (result == "refresh") {
+            getUsers();
+          }
+        },
+        child: const Icon(Icons.person_add_alt_1),
+      ),
     );
   }
 }

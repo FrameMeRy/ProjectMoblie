@@ -73,10 +73,16 @@ class _LoginState extends State<Login> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         textHeader("Login"),
+                        SizedBox(
+                          height: 100.0,
+                        ),
                         emailInputField(),
+                        SizedBox(
+                          height: 20.0,
+                        ),
                         passwordInputField(),
                         SizedBox(
-                          height: 10.0,
+                          height: 30.0,
                         ),
                         Row(
                           children: [
@@ -114,7 +120,11 @@ class _LoginState extends State<Login> {
   Widget emailInputField() {
     return TextFormField(
       initialValue: "a@gmail.com",
-      decoration: InputDecoration(labelText: "Email", icon: Icon(Icons.email)),
+      decoration: InputDecoration(
+          labelText: "Email",
+          icon: Icon(Icons.email, color: Colors.white),
+          filled: true,
+          fillColor: Colors.white),
       validator: (value) {
         if (value!.isEmpty) {
           return "this field is required";
@@ -132,8 +142,11 @@ class _LoginState extends State<Login> {
     return TextFormField(
       initialValue: "1q2w3e4r",
       obscureText: true,
-      decoration:
-          InputDecoration(labelText: "Password", icon: Icon(Icons.lock)),
+      decoration: InputDecoration(
+          labelText: "Password",
+          icon: Icon(Icons.lock, color: Colors.white),
+          filled: true,
+          fillColor: Colors.white),
       validator: (value) {
         if (value!.isEmpty) {
           return "this field is required";

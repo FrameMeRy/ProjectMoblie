@@ -82,6 +82,23 @@ class _UserFormState extends State<UserForm> {
     );
   }
 
+  Widget fnameInputField() {
+    return TextFormField(
+      initialValue: user.name,
+      decoration: InputDecoration(
+        labelText: 'Full name',
+        icon: Icon(Icons.person),
+      ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'This field is required';
+        }
+        return null;
+      },
+      onSaved: (newValue) => user.name = newValue,
+    );
+  }
+
 
   Widget emailInputField() {
     return TextFormField(
