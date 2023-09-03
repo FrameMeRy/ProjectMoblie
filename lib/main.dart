@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pj/screens/login.dart';
+import 'screens/home.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,12 +11,15 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'User CRUD',
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const Home(),
+        '/login': (context) => const LoginForm(),
+
+      },
     );
   }
 }
