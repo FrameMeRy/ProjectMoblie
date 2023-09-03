@@ -83,7 +83,7 @@ class _UserFormState extends State<UserForm> {
 
   Widget emailInputField() {
     return TextFormField(
-      initialValue: user.user,
+      initialValue: user.email,
       decoration: InputDecoration(
         labelText: 'Email',
         icon: Icon(Icons.email),
@@ -94,7 +94,7 @@ class _UserFormState extends State<UserForm> {
         }
         return null;
       },
-      onSaved: (newValue) => user.user = newValue,
+      onSaved: (newValue) => user.email = newValue,
     );
   }
 

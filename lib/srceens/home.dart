@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:pj/srceens/add_user.dart';
 import 'package:http/http.dart' as http;
 import 'package:pj/models/configure.dart';
@@ -60,7 +59,7 @@ class _HomeState extends State<Home> {
           child: Card(
             child: ListTile(
               title: Text("${user.name}"),
-              subtitle: Text("${user.user}"),
+              subtitle: Text("${user.email}"),
               onTap: () {
                 Navigator.push(
                     context,
@@ -135,7 +134,7 @@ class SideMenu extends StatelessWidget {
 
     if (user.id != null) {
       accountName = user.name!;
-      accountEmail = user.user!;
+      accountEmail = user.email!;
     }
     return Drawer(
       child: Column(

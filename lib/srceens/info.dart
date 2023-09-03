@@ -19,7 +19,7 @@ class UserInfo extends StatelessWidget {
           child: ListView(
             children: [
              ListTile(title: Text("Full name"),subtitle: Text("${user.name}"),),
-             ListTile(title: Text("Email"),subtitle: Text("${user.user}"),),
+             ListTile(title: Text("Email"),subtitle: Text("${user.email}"),),
              ListTile(title: Text("Gender"),subtitle: Text("${user.gender}"),),
             ],
           ),
