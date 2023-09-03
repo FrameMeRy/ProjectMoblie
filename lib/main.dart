@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pj/screens/login.dart';
-import 'screens/home.dart';
+import 'srceens/home.dart';
+import 'srceens/login.dart';
+import 'srceens/add_user.dart';
 
 void main() {
   runApp(const MainApp());
@@ -16,8 +17,9 @@ class MainApp extends StatelessWidget {
       title: 'User CRUD',
       initialRoute: '/',
       routes: {
-        '/': (context) =>  const Home(),
-        '/login': (context) =>  const Login(),
+        '/': (context) => const Home(),
+        '/login': (context) => const Login(),
+        '/add_user': (context) => const UserForm(),
 
       },
     );

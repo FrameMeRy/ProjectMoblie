@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "fullname": "Ratchanon chukiattakerng",
+      "email": "a@test.com",
+      "password": "1q2w3e4r",
+      "gender": "Male"
+    },
+    {
+      "id": 2,
+      "fullname": "Cat Najasshhs",
+      "email": "cat@meow.com",
+      "password": "1q2w3e4r",
+      "gender": "Male"
+    },
+    {
+      "id": 3,
+      "fullname": "ratchano",
+      "email": "tt@asd.com",
+      "password": "123123",
+      "gender": "Male"
+    },
+    {
+      "id": 4,
+      "fullname": "ratchano",
+      "email": "tt@asd.com",
+      "password": "123123",
+      "gender": "Male"
+    }
+  ]
+}
