@@ -2,11 +2,10 @@
   "users": [
     {
       "id": 1,
-        "user": "teepakon@gmail.com",
+        "email": "a@gmail.com",
         "password": "1q2w3e4r",
         "name": "Teepakon",
-        "lastname" : "Trakoonkullakit",
-        "account_number": "1622348830",
+        "accnumber": "1622348830",
         "address":"123/456 Bangkok Thailand",
         "gender" : "Male"
     }

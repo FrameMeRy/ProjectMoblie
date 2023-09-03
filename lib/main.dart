@@ -12,7 +12,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp( 
       debugShowCheckedModeBanner: false,
       title: 'User CRUD',
       initialRoute: '/',
@@ -20,8 +20,8 @@ class MainApp extends StatelessWidget {
         '/': (context) => const Home(),
         '/login': (context) => const Login(),
         '/add_user': (context) => const UserForm(),
-
-      },
+      },  
     );
   }
 }
+

@@ -13,8 +13,7 @@ class Users {
     String? email;
     String? password;
     String? name;
-    String? lastname;
-    String? accountNumber;
+    String? accnumber;
     String? address;
     String? gender;
 
@@ -23,8 +22,7 @@ class Users {
         this.email,
         this.password,
         this.name,
-        this.lastname,
-        this.accountNumber,
+        this.accnumber,
         this.address,
         this.gender,
     });
@@ -34,8 +32,7 @@ class Users {
         email: json["email"],
         password: json["password"],
         name: json["name"],
-        lastname: json["lastname"],
-        accountNumber: json["account_number"],
+        accnumber: json["accnumber"],
         address: json["address"],
         gender: json["gender"],
     );
@@ -45,8 +42,7 @@ class Users {
         "email": email,
         "password": password,
         "name": name,
-        "lastname": lastname,
-        "account_number": accountNumber,
+        "accnumber": accnumber,
         "address": address,
         "gender": gender,
     };
