@@ -52,19 +52,7 @@ class _UserFormState extends State<UserForm> {
     );
   }
 
- Future<void> addNewUser(user) async{
-    var url = Uri.http(Configure.server, "users");
-    var resp = await http.post(url,
-        headers: <String, String>{ 'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(user.toJson()));
-    var rs = usersFromJson("[${resp.body}]");
 
-    if (rs.length == 1){
-      Navigator.pop(context, "refresh");
-    }
-    return;
-  }
 
 
   Widget fnameInputField() {
@@ -192,6 +180,20 @@ class _UserFormState extends State<UserForm> {
     }
   }
 
+   Future<void> addNewUser(user) async{
+    var url = Uri.http(Configure.server, "users");
+    var resp = await http.post(url,
+        headers: <String, String>{ 'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(user.toJson()));
+    var rs = usersFromJson("[${resp.body}]");
+
+    if (rs.length == 1){
+      Navigator.pop(context, "refresh");
+    }
+    return;
+  }
+  
   Widget submitButton() {
     return ElevatedButton(
       onPressed: () {

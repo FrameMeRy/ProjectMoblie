@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pj/srceens/cart.dart';
 import 'srceens/home.dart';
 import 'srceens/login.dart';
 import 'srceens/add_user.dart';
@@ -20,6 +21,8 @@ class MainApp extends StatelessWidget {
         '/': (context) => const Home(),
         '/login': (context) => const Login(),
         '/add_user': (context) => const UserForm(),
+        '/cart': (context) => const Cartpage(),
+
       },  
     );
   }

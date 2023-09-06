@@ -3,26 +3,28 @@ import 'package:pj/models/product.dart';
 import 'package:http/http.dart' as http;
 import 'package:pj/models/configure.dart';
 import 'package:flutter/material.dart';
+import '../models/cart.dart';
+import 'home.dart';
 import 'login.dart';
 import 'package:pj/models/users.dart';
 import 'info.dart';
 import 'cart.dart';
 
-class Home extends StatefulWidget {
-  static const routeName = '/';
-  const Home({super.key});
+class Cartpage extends StatefulWidget {
+  static const routeName = '/cart';
+  const Cartpage({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<Cartpage> createState() => _CartpageState();
 }
 
-class _HomeState extends State<Home> {
-  List<Product> _productList = [];
+class _CartpageState extends State<Cartpage> {
+  List<Cart> _cartList = [];
   Future<void> getUsers() async {
-    var url = Uri.http(Configure.server, "Product");
+    var url = Uri.http(Configure.server, "Cart");
     var resp = await http.get(url);
     setState(() {
-      _productList = productFromJson(resp.body);
+      _cartList = cartFromJson(resp.body);
       mainBody = showUsers();
     });
     return;
@@ -52,22 +54,22 @@ class _HomeState extends State<Home> {
 
   Widget showUsers() {
     return ListView.builder(
-      itemCount: _productList.length,
+      itemCount: _cartList.length,
       itemBuilder: (context, index) {
-        Product product = _productList[index] as Product;
+        Cart cart = _cartList[index] as Cart;
         return Dismissible(
           key: UniqueKey(),
           child: Card(
             child: ListTile(
-              leading: Image.network("${product.photo}"),
-              title: Text("${product.namep}"),
-              subtitle: Text("ราคา ${product.pricep}  บาท"),
+              leading: Image.network("${cart.photoc}"),
+              title: Text("${cart.namec}"),
+              subtitle: Text("ราคา ${cart.pricec}  บาท"),
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => UserInfo(),
-                        settings: RouteSettings(arguments: product)));
+                        settings: RouteSettings(arguments: cart)));
               },
               trailing: IconButton(
                 onPressed: () async {
@@ -85,7 +87,7 @@ class _HomeState extends State<Home> {
             ),
           ),
           onDismissed: (direction) {
-            removeUsers(product);
+            removeUsers(cart);
           },
           background: Container(
             color: Colors.red,
@@ -172,13 +174,6 @@ class SideMenu extends StatelessWidget {
                 ),
               ),
             ),
-             ListTile(
-              leading: Icon(Icons.login),
-              title: Text("Login"),
-              onTap: () {
-                Navigator.pushNamed(context, Login.routeName);
-              },
-            ),
             ListTile(
               leading: Icon(Icons.home),
               title: Text("Home"),
@@ -186,7 +181,7 @@ class SideMenu extends StatelessWidget {
                 Navigator.pushNamed(context, Home.routeName);
               },
             ),
-           
+            
             ListTile(
               leading: Icon(Icons.trolley),
               title: Text("cart"),

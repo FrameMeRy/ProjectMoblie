@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pj/models/users.dart';
+import 'package:pj/models/product.dart';
 
 class UserInfo extends StatelessWidget {
 
@@ -8,22 +8,27 @@ class UserInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    Users user = ModalRoute.of(context)!.settings.arguments as Users;
+    Product product = ModalRoute.of(context)!.settings.arguments as Product;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("User Info"),
+        title: const Text("Product Info"),
+        backgroundColor: Colors.pink,
+
       ),
       body: Container(
         margin: const EdgeInsets.all(10),
-        child: Card(
-          child: ListView(
-            children: [
-             ListTile(title: Text("Full name"),subtitle: Text("${user.name}"),),
-             ListTile(title: Text("Email"),subtitle: Text("${user.email}"),),
-             ListTile(title: Text("Account number"),subtitle: Text("${user.accnumber}"),),
-             ListTile(title: Text("Address"),subtitle: Text("${user.address}"),),
-             ListTile(title: Text("Gender"),subtitle: Text("${user.gender}"),),
-            ],
+        child: Center(
+          child: Card(
+            child: Center(
+              child: ListView(
+                children: [
+                 ListTile(title: Image.network("${product.photo}"),),
+                 ListTile(title: Text("ชื่อของไดโนเสาร์"),subtitle: Text("${product.namep}"),),
+                 ListTile(title: Text("รายละเอียด"),subtitle: Text("${product.detailp}"),),
+                 ListTile(title: Text("ราคา"),subtitle: Text("${product.pricep}"),),
+                ],
+              ),
+            ),
           ),
         ),
       ),

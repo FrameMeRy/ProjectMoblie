@@ -16,15 +16,23 @@
         "namep": "Tyrannosauras",
         "detailp": "เป็นไดโนเสาร์ที่ดุร้าย กินเนื้อเป็นอาหาร",
         "pricep": "39000",
-        "amountp": "10"
-    }
+        "photo": "https://m.media-amazon.com/images/I/61bbjsXE4yL._AC_UF894,1000_QL80_.jpg"
+    },
+    {
+      "id": 2,
+      "namep": "Tyrannosauras",
+      "detailp": "เป็นไดโนเสาร์ที่ดุร้าย กินเนื้อเป็นอาหาร",
+      "pricep": "39000",
+      "photo": "https://m.media-amazon.com/images/I/61bbjsXE4yL._AC_UF894,1000_QL80_.jpg"
+  }
   ],
   "cart": [
     {
-        "id": 1,
-        "namec": "Tyrannosauras",
-        "pricec": "39000",
-        "amountc": "2"
+      "id": 1,
+      "namec": "Tyrannosauras",
+      "detailc": "เป็นไดโนเสาร์ที่ดุร้าย กินเนื้อเป็นอาหาร",
+      "pricec": "39000",
+      "photoc": "https://m.media-amazon.com/images/I/61bbjsXE4yL._AC_UF894,1000_QL80_.jpg"
     }
   ],
   "pay": [
