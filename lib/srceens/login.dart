@@ -1,7 +1,9 @@
+import 'package:flutter_application_1/models/configure.dart';
+import 'package:flutter_application_1/models/users.dart';
 import 'package:http/http.dart' as http;
-import 'package:pj/models/configure.dart';
+
 import 'package:flutter/material.dart';
-import 'package:pj/models/users.dart';
+
 import 'home.dart';
 import 'add_user.dart';
 import 'package:email_validator/email_validator.dart';
@@ -41,8 +43,9 @@ class _LoginState extends State<Login> {
       child: Text(
         headerText,
         style: TextStyle(
-          fontSize: 50.0,
+          fontSize: 35.0,
           fontWeight: FontWeight.bold,
+          color: Colors.white,
         ),
       ),
     );
@@ -50,57 +53,67 @@ class _LoginState extends State<Login> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-            color: Colors.white, // ตั้งค่าสีพื้นหลังของ Container เป็นสีขาว
-            child: Stack(children: [
-              Positioned.fill(
-                child: ColorFiltered(
-                  colorFilter: ColorFilter.mode(
-                    Colors.black.withOpacity(0.5), // ปรับระดับของความจางในนี้
-                    BlendMode.dstATop,
-                  ),
-                  child: Image.network(
-                    "https://wallpapercave.com/wp/wp3359189.jpg?fbclid=IwAR1vQ6KDiq12SlGrd_Vpn8EhzZqLnDoMieI35cBfQZ7j6rrRFl8e4d7MX0Q",
-                    fit: BoxFit.cover,
-                  ),
+      appBar: AppBar(
+        title: textHeader(
+            "Login"), // Set the app bar title using your textHeader widget
+        backgroundColor: Colors.pink, // Set the background color of the app bar
+      ),
+      body: Container(
+        color: Colors.white,
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: ColorFiltered(
+                colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.5),
+                  BlendMode.dstATop,
+                ),
+                child: Image.network(
+                  "https://wallpapercave.com/wp/wp3359189.jpg?fbclid=IwAR1vQ6KDiq12SlGrd_Vpn8EhzZqLnDoMieI35cBfQZ7j6rrRFl8e4d7MX0Q",
+                  fit: BoxFit.cover,
                 ),
               ),
-              Container(
-                margin: EdgeInsets.all(10.0),
-                child: Form(
-                    key: _formkey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+            ),
+            Container(
+              margin: EdgeInsets.all(10.0),
+              child: Form(
+                key: _formkey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 100.0,
+                    ),
+                    emailInputField(),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    passwordInputField(),
+                    SizedBox(
+                      height: 30.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment
+                          .center, // Center the buttons horizontally
                       children: [
-                        textHeader("Login"),
+                        submitButton(),
                         SizedBox(
-                          height: 100.0,
+                          width: 10.0,
                         ),
-                        emailInputField(),
+                        registerlink(),
                         SizedBox(
-                          height: 20.0,
-                        ),
-                        passwordInputField(),
-                        SizedBox(
-                          height: 30.0,
-                        ),
-                        Row(
-                          children: [
-                            submitButton(),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                            backButton(),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                            registerlink()
-                          ],
+                          width: 10.0,
                         ),
                       ],
-                    )),
+                    ),
+                  ],
+                ),
               ),
-            ])));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget fnameInputField() {
@@ -166,7 +179,10 @@ class _LoginState extends State<Login> {
           login(user);
         }
       },
-      child: Text("login"),
+      child: Text("Login"),
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(Colors.pink),
+      ),
     );
   }
 
@@ -175,17 +191,23 @@ class _LoginState extends State<Login> {
       onPressed: () {
         Navigator.pushNamed(context, Home.routeName);
       },
-      child: Text("back"),
+      child: Text("Back"),
     );
   }
 
   Widget registerlink() {
-    return InkWell(
-      child: const Text("Sigh Up"),
-      onTap: () {
+    return ElevatedButton(
+      child: const Text("Sign Up"),
+      onPressed: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => UserForm()));
+          context,
+          MaterialPageRoute(builder: (context) => UserForm()),
+        );
       },
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(
+            Colors.pink), // Change the button color to pink
+      ),
     );
   }
 }
