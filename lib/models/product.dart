@@ -14,6 +14,7 @@ class Product {
     String? detailp;
     String? pricep;
     String? photo;
+    String? count;
 
     Product({
         this.id,
@@ -21,6 +22,7 @@ class Product {
         this.detailp,
         this.pricep,
         this.photo,
+        this.count,
     });
 
     factory Product.fromJson(Map<String, dynamic> json) => Product(
@@ -29,6 +31,7 @@ class Product {
         detailp: json["detailp"],
         pricep: json["pricep"],
         photo: json["photo"],
+        count: json["count"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -37,5 +40,6 @@ class Product {
         "detailp": detailp,
         "pricep": pricep,
         "photo": photo,
+        "count": count,
     };
 }

@@ -1,9 +1,9 @@
-import 'package:flutter_application_1/models/configure.dart';
-import 'package:flutter_application_1/models/users.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 
+import '../models/configure.dart';
+import '../models/users.dart';
 import 'home.dart';
 import 'add_user.dart';
 import 'package:email_validator/email_validator.dart';

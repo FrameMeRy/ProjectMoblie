@@ -14,6 +14,7 @@ class Cart {
     String? detailc;
     String? pricec;
     String? photoc;
+    String? countc;
 
     Cart({
         this.id,
@@ -21,6 +22,7 @@ class Cart {
         this.detailc,
         this.pricec,
         this.photoc,
+        this.countc,
     });
 
     factory Cart.fromJson(Map<String, dynamic> json) => Cart(
@@ -29,6 +31,7 @@ class Cart {
         detailc: json["detailc"],
         pricec: json["pricec"],
         photoc: json["photoc"],
+        countc: json["countc"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -37,5 +40,6 @@ class Cart {
         "detailc": detailc,
         "pricec": pricec,
         "photoc": photoc,
+        "countc": countc,
     };
 }

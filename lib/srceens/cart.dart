@@ -5,10 +5,8 @@ import 'package:pj/models/configure.dart';
 import 'package:flutter/material.dart';
 import '../models/cart.dart';
 import 'home.dart';
-import 'login.dart';
 import 'package:pj/models/users.dart';
 import 'info.dart';
-import 'cart.dart';
 
 class Cartpage extends StatefulWidget {
   static const routeName = '/cart';
@@ -30,8 +28,8 @@ class _CartpageState extends State<Cartpage> {
     return;
   }
 
-  Future<void> removeUsers(product) async {
-    var url = Uri.http(Configure.server, "product/${product.id}");
+  Future<void> removeUsers(cart) async {
+    var url = Uri.http(Configure.server, "cart/${cart.id}");
     var resp = await http.delete(url);
     print(resp.body);
     return;
@@ -64,6 +62,7 @@ class _CartpageState extends State<Cartpage> {
               leading: Image.network("${cart.photoc}"),
               title: Text("${cart.namec}"),
               subtitle: Text("ราคา ${cart.pricec}  บาท"),
+              trailing : Text("จำนวน ${cart.countc} ตัว"),
               onTap: () {
                 Navigator.push(
                     context,
@@ -71,19 +70,7 @@ class _CartpageState extends State<Cartpage> {
                         builder: (context) => UserInfo(),
                         settings: RouteSettings(arguments: cart)));
               },
-              trailing: IconButton(
-                onPressed: () async {
-                  // String result = await Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => UserForm(),
-                  //         settings: RouteSettings(arguments: product)));
-                  // if (result == "refresh") {
-                  //   getUsers();
-                  // }
-                },
-                icon: Icon(Icons.trolley),
-              ),
+              
             ),
           ),
           onDismissed: (direction) {
@@ -113,7 +100,7 @@ class _CartpageState extends State<Cartpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home"),
+        title: Text("Cart Page"),
         backgroundColor: Colors.pink,
       ),
       drawer: SideMenu(),
@@ -175,8 +162,8 @@ class SideMenu extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.home),
-              title: Text("Home"),
+              leading: Icon(Icons.attach_money),
+              title: Text("Product"),
               onTap: () {
                 Navigator.pushNamed(context, Home.routeName);
               },

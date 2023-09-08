@@ -3,6 +3,7 @@ import 'package:pj/models/product.dart';
 import 'package:http/http.dart' as http;
 import 'package:pj/models/configure.dart';
 import 'package:flutter/material.dart';
+import '../models/cart.dart';
 import 'login.dart';
 import 'package:pj/models/users.dart';
 import 'info.dart';
@@ -71,14 +72,14 @@ class _HomeState extends State<Home> {
               },
               trailing: IconButton(
                 onPressed: () async {
-                  // String result = await Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => UserForm(),
-                  //         settings: RouteSettings(arguments: product)));
-                  // if (result == "refresh") {
-                  //   getUsers();
-                  // }
+                  addNewcart(
+                    product.namep!, 
+                    product.detailp!, 
+                    product.pricep!, 
+                    product.photo!,
+                    product.count!
+                    
+                  );
                 },
                 icon: Icon(Icons.trolley),
               ),
@@ -98,6 +99,39 @@ class _HomeState extends State<Home> {
     );
   }
 
+  Future<void> addNewcart(String namep, String detailp, String pricep, String photo ,String count) async {
+  try {
+    var url = Uri.http(Configure.server, "cart");
+    var dataWithoutId = {
+      "namec": namep,
+      "detailc": detailp,
+      "pricec": pricep,
+      "photoc": photo,
+      "countc": count,
+
+    };
+    var resp = await http.post(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(dataWithoutId),
+    );
+    if (resp.statusCode == 200) {
+      var rs = cartFromJson("[${resp.body}]");
+      if (rs.length == 1) {
+        Navigator.pop(context, "refresh");
+        
+      }
+    } else {
+      print("Error: ${resp.statusCode}");
+    }
+  } catch (e) {
+    print("Error: $e");
+  }
+}
+
+
   Widget mainBody = Container();
   @override
   void initState() {
@@ -111,7 +145,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home"),
+        title: Text("Product Page"),
         backgroundColor: Colors.pink,
       ),
       drawer: SideMenu(),
@@ -138,7 +172,7 @@ class SideMenu extends StatelessWidget {
     String accountName = "N/A";
     String accountEmail = "N/A";
     String accountUrl =
-        "https://scontent.fbkk5-6.fna.fbcdn.net/v/t1.6435-1/158393181_2823294271244454_5311566327709872153_n.jpg?stp=dst-jpg_p240x240&_nc_cat=102&ccb=1-7&_nc_sid=7206a8&_nc_eui2=AeErpvhXA4uGnEi0ZHlT4jjer__oCP0DY_Cv_-gI_QNj8A7xnZRkq69hhUN565T086IdDYJEsC1lx5kg8RsSdAv5&_nc_ohc=nyKWEvewsKUAX87eVhf&_nc_ht=scontent.fbkk5-6.fna&oh=00_AfAxKxqR3_vGnUPh50ZJAi5-lr1ja6oQtdlLY4A3rhvTcw&oe=6519657B";
+        "https://img.freepik.com/free-photo/cute-ai-generated-cartoon-bunny_23-2150288870.jpg";
 
     Users user = Configure.login;
 
@@ -172,7 +206,7 @@ class SideMenu extends StatelessWidget {
                 ),
               ),
             ),
-             ListTile(
+            ListTile(
               leading: Icon(Icons.login),
               title: Text("Login"),
               onTap: () {
@@ -180,13 +214,12 @@ class SideMenu extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: Icon(Icons.home),
-              title: Text("Home"),
+              leading: Icon(Icons.attach_money),
+              title: Text("Product"),
               onTap: () {
                 Navigator.pushNamed(context, Home.routeName);
               },
             ),
-           
             ListTile(
               leading: Icon(Icons.trolley),
               title: Text("cart"),

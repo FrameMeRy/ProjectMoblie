@@ -2,48 +2,42 @@
   "users": [
     {
       "id": 1,
-        "email": "a@gmail.com",
-        "password": "1q2w3e4r",
-        "name": "Teepakon",
-        "accnumber": "1622348830",
-        "address":"123/456 Bangkok Thailand",
-        "gender" : "Male"
+      "email": "a@gmail.com",
+      "password": "1q2w3e4r",
+      "name": "Teepakon",
+      "accnumber": "1622348830",
+      "address": "123/456 Bangkok Thailand",
+      "gender": "Male"
     }
   ],
   "product": [
     {
-        "id": 1,
-        "namep": "Tyrannosauras",
-        "detailp": "เป็นไดโนเสาร์ที่ดุร้าย กินเนื้อเป็นอาหาร",
-        "pricep": "39000",
-        "photo": "https://m.media-amazon.com/images/I/61bbjsXE4yL._AC_UF894,1000_QL80_.jpg"
-    },
-    {
-      "id": 2,
+      "id": 1,
       "namep": "Tyrannosauras",
       "detailp": "เป็นไดโนเสาร์ที่ดุร้าย กินเนื้อเป็นอาหาร",
       "pricep": "39000",
-      "photo": "https://m.media-amazon.com/images/I/61bbjsXE4yL._AC_UF894,1000_QL80_.jpg"
-  }
+      "photo": "https://m.media-amazon.com/images/I/61bbjsXE4yL._AC_UF894,1000_QL80_.jpg",
+      "count": "1"
+    }
   ],
   "cart": [
     {
-      "id": 1,
       "namec": "Tyrannosauras",
       "detailc": "เป็นไดโนเสาร์ที่ดุร้าย กินเนื้อเป็นอาหาร",
       "pricec": "39000",
-      "photoc": "https://m.media-amazon.com/images/I/61bbjsXE4yL._AC_UF894,1000_QL80_.jpg"
+      "photoc": "https://m.media-amazon.com/images/I/61bbjsXE4yL._AC_UF894,1000_QL80_.jpg",
+      "countc": "1",
+      "id": 1
     }
   ],
   "pay": [
     {
-        "id": 1,
-        "namepa": "Tyrannosauras",
-        "pricepa": "39000",
-        "amountpa": "2",
-        "addressp": "123/456 Bangkok Thailand",
-        "delivery_fee" : "5"
+      "id": 1,
+      "namepa": "Tyrannosauras",
+      "pricepa": "39000",
+      "amountpa": "2",
+      "addressp": "123/456 Bangkok Thailand",
+      "delivery_fee": "5"
     }
   ]
-  
 }
