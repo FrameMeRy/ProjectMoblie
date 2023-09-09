@@ -10,7 +10,9 @@ dependencies:
   email_validator: ^2.1.17
   flutter:
     sdk: flutter
+  footer: ^0.0.4
   http: ^1.1.0
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
