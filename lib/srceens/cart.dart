@@ -1,8 +1,8 @@
-import 'dart:convert';
-import 'package:pj/models/product.dart';
 import 'package:http/http.dart' as http;
 import 'package:pj/models/configure.dart';
 import 'package:flutter/material.dart';
+import 'package:pj/srceens/login.dart';
+import 'package:pj/srceens/receipt.dart';
 import '../models/cart.dart';
 import 'home.dart';
 import 'package:pj/models/users.dart';
@@ -35,20 +35,7 @@ class _CartpageState extends State<Cartpage> {
     return;
   }
 
-  Future<void> addNewUser(user) async {
-    var url = Uri.http(Configure.server, "users");
-    var resp = await http.post(url,
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(user.toJson()));
-    var rs = productFromJson("[${resp.body}]");
 
-    if (rs.length == 1) {
-      Navigator.pop(context);
-    }
-    return;
-  }
 
   Widget showUsers() {
     return ListView.builder(
@@ -62,7 +49,7 @@ class _CartpageState extends State<Cartpage> {
               leading: Image.network("${cart.photoc}"),
               title: Text("${cart.namec}"),
               subtitle: Text("ราคา ${cart.pricec}  บาท"),
-              trailing : Text("จำนวน ${cart.countc} ตัว"),
+              trailing: Text("จำนวน ${cart.countc} ตัว"),
               onTap: () {
                 Navigator.push(
                     context,
@@ -70,7 +57,6 @@ class _CartpageState extends State<Cartpage> {
                         builder: (context) => UserInfo(),
                         settings: RouteSettings(arguments: cart)));
               },
-              
             ),
           ),
           onDismissed: (direction) {
@@ -105,16 +91,14 @@ class _CartpageState extends State<Cartpage> {
       ),
       drawer: SideMenu(),
       body: mainBody,
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () async {
-      //     String result = await Navigator.push(
-      //         context, MaterialPageRoute(builder: (context) => UserForm()));
-      //     if (result == "refresh") {
-      //       getUsers();
-      //     }
-      //   },
-      //   child: const Icon(Icons.person_add_alt_1),
-      // ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, Receipt.routeName);
+        },
+        child: Icon(Icons.shopping_cart_sharp),
+        backgroundColor: Colors.green,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }
@@ -162,13 +146,19 @@ class SideMenu extends StatelessWidget {
               ),
             ),
             ListTile(
+              leading: Icon(Icons.login),
+              title: Text("Login"),
+              onTap: () {
+                Navigator.pushNamed(context, Login.routeName);
+              },
+            ),
+            ListTile(
               leading: Icon(Icons.attach_money),
               title: Text("Product"),
               onTap: () {
                 Navigator.pushNamed(context, Home.routeName);
               },
             ),
-            
             ListTile(
               leading: Icon(Icons.trolley),
               title: Text("cart"),
