@@ -33,6 +33,7 @@ class _ReceiptState extends State<Receipt> {
       print(resp.body);
     }
   }
+
   Widget showUsers() {
     int totalItemCount = 0;
     int totalPrice = 0;
@@ -61,7 +62,7 @@ class _ReceiptState extends State<Receipt> {
                   Image.network(
                     "https://cdn.pic.in.th/file/picinth/334654851_946473650130401_724856826467276888_n.jpeg",
                     width: 200,
-                    height: 300,
+                    height: 600,
                   ),
                 ],
               ),
@@ -86,11 +87,45 @@ class _ReceiptState extends State<Receipt> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Receipt"),
-        backgroundColor: Colors.pink,
+        title: Text(
+          'RECEIPT',
+          style: TextStyle(
+            fontSize: 40,
+            fontWeight: FontWeight.bold,
+            foreground: Paint()
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = 2
+              ..color = Colors.white,
+            shadows: [
+              BoxShadow(
+                color: Colors.black,
+                offset: Offset(2, 2),
+                blurRadius: 4,
+              ),
+            ],
+          ),
+        ),
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.red,
+                Colors.orange,
+                Colors.yellow,
+                Colors.green,
+                Colors.blue,
+                Colors.indigo,
+                Colors.purple,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
       ),
       body: mainBody,
-       floatingActionButton: Container(
+      floatingActionButton: Container(
         width: 200,
         height: 50,
         child: ElevatedButton(

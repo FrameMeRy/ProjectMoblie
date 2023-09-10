@@ -4,8 +4,7 @@ import 'package:pj/srceens/home.dart';
 class Successpage extends StatefulWidget {
   static const routeName = '/success';
 
-    const Successpage({super.key});
-
+  const Successpage({super.key});
 
   @override
   State<Successpage> createState() => _SuccesspageState();

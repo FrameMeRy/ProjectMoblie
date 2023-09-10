@@ -6,11 +6,11 @@ import 'package:pj/srceens/receipt.dart';
 import '../models/cart.dart';
 import 'home.dart';
 import 'package:pj/models/users.dart';
-import 'info.dart';
 
 class Cartpage extends StatefulWidget {
   static const routeName = '/cart';
-  const Cartpage({super.key});
+
+  const Cartpage({Key? key}) : super(key: key);
 
   @override
   State<Cartpage> createState() => _CartpageState();
@@ -18,6 +18,7 @@ class Cartpage extends StatefulWidget {
 
 class _CartpageState extends State<Cartpage> {
   List<Cart> _cartList = [];
+
   Future<void> getUsers() async {
     var url = Uri.http(Configure.server, "Cart");
     var resp = await http.get(url);
@@ -25,48 +26,69 @@ class _CartpageState extends State<Cartpage> {
       _cartList = cartFromJson(resp.body);
       mainBody = showUsers();
     });
-    return;
   }
 
   Future<void> removeUsers(cart) async {
     var url = Uri.http(Configure.server, "cart/${cart.id}");
     var resp = await http.delete(url);
     print(resp.body);
-    return;
   }
-
-
 
   Widget showUsers() {
     return ListView.builder(
       itemCount: _cartList.length,
       itemBuilder: (context, index) {
-        Cart cart = _cartList[index] as Cart;
-        return Dismissible(
-          key: UniqueKey(),
-          child: Card(
-            child: ListTile(
-              leading: Image.network("${cart.photoc}"),
-              title: Text("${cart.namec}"),
-              subtitle: Text("ราคา ${cart.pricec}  บาท"),
-              trailing: Text("จำนวน ${cart.countc} ตัว"),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => UserInfo(),
-                        settings: RouteSettings(arguments: cart)));
-              },
-            ),
+        Cart cart = _cartList[index];
+        return Card(
+          elevation: 3,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
           ),
-          onDismissed: (direction) {
-            removeUsers(cart);
-          },
-          background: Container(
-            color: Colors.red,
-            margin: EdgeInsets.symmetric(horizontal: 15),
-            alignment: Alignment.centerRight,
-            child: Icon(Icons.delete, color: Colors.white),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ],
+            ),
+            child: ListTile(
+              leading: Container(
+                width: 65,
+                height: 300,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                  image: DecorationImage(
+                    image: NetworkImage("${cart.photoc}"),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+              title: Text(
+                "${cart.namec}",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              subtitle: Text(
+                "Price: ${cart.pricec} บาท",
+              ),
+              trailing: Text(
+                "Quantity: ${cart.countc} ตัว",
+              ),
+            ),
           ),
         );
       },
@@ -74,6 +96,7 @@ class _CartpageState extends State<Cartpage> {
   }
 
   Widget mainBody = Container();
+
   @override
   void initState() {
     super.initState();
@@ -86,8 +109,42 @@ class _CartpageState extends State<Cartpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Cart Page"),
-        backgroundColor: Colors.pink,
+        title: Text(
+          'CART',
+          style: TextStyle(
+            fontSize: 40,
+            fontWeight: FontWeight.bold,
+            foreground: Paint()
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = 2
+              ..color = Colors.white,
+            shadows: [
+              BoxShadow(
+                color: Colors.black,
+                offset: Offset(2, 2),
+                blurRadius: 4,
+              ),
+            ],
+          ),
+        ),
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.red,
+                Colors.orange,
+                Colors.yellow,
+                Colors.green,
+                Colors.blue,
+                Colors.indigo,
+                Colors.purple,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
       ),
       drawer: SideMenu(),
       body: mainBody,
@@ -96,7 +153,7 @@ class _CartpageState extends State<Cartpage> {
           Navigator.pushNamed(context, Receipt.routeName);
         },
         child: Icon(Icons.shopping_cart_sharp),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.orange,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
@@ -104,69 +161,166 @@ class _CartpageState extends State<Cartpage> {
 }
 
 class SideMenu extends StatelessWidget {
-  const SideMenu({super.key});
+  const SideMenu({Key? key});
 
   @override
   Widget build(BuildContext context) {
     String accountName = "N/A";
     String accountEmail = "N/A";
     String accountUrl =
-        "https://scontent.fbkk5-6.fna.fbcdn.net/v/t1.6435-1/158393181_2823294271244454_5311566327709872153_n.jpg?stp=dst-jpg_p240x240&_nc_cat=102&ccb=1-7&_nc_sid=7206a8&_nc_eui2=AeErpvhXA4uGnEi0ZHlT4jjer__oCP0DY_Cv_-gI_QNj8A7xnZRkq69hhUN565T086IdDYJEsC1lx5kg8RsSdAv5&_nc_ohc=nyKWEvewsKUAX87eVhf&_nc_ht=scontent.fbkk5-6.fna&oh=00_AfAxKxqR3_vGnUPh50ZJAi5-lr1ja6oQtdlLY4A3rhvTcw&oe=6519657B";
-
+        "https://img.freepik.com/free-photo/cute-ai-generated-cartoon-bunny_23-2150288870.jpg";
     Users user = Configure.login;
-
     if (user.id != null) {
       accountName = user.name!;
       accountEmail = user.email!;
     }
     return Drawer(
       child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            UserAccountsDrawerHeader(
-              accountName: Text(accountName,
-                  style: TextStyle(fontWeight: FontWeight.bold)),
-              accountEmail: Text(accountEmail,
-                  style: TextStyle(fontWeight: FontWeight.bold)),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(
+                  "https://png.pngtree.com/thumb_back/fh260/background/20200714/pngtree-modern-double-color-futuristic-neon-background-image_351866.jpg",
+                ),
+                fit: BoxFit.cover,
+                colorFilter: ColorFilter.mode(
+                  Colors.grey.withOpacity(0.8),
+                  BlendMode.darken,
+                ),
+              ),
+              borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(20),
+                bottomLeft: Radius.circular(20),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.3),
+                  blurRadius: 5,
+                  offset: Offset(0, 2),
+                ),
+              ],
+            ),
+            child: UserAccountsDrawerHeader(
+              accountName: Text(
+                accountName,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
+              ),
+              accountEmail: Text(
+                accountEmail,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
+              ),
               currentAccountPicture: CircleAvatar(
                 backgroundImage: NetworkImage(accountUrl),
                 backgroundColor: Colors.white,
               ),
               decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(
-                      "https://png.pngtree.com/thumb_back/fh260/background/20200731/pngtree-blue-carbon-background-with-sport-style-and-golden-light-image_371487.jpg"),
-                  fit: BoxFit.cover,
-                  colorFilter: ColorFilter.mode(
-                    Colors.grey.withOpacity(0.8),
-                    BlendMode.darken,
-                  ),
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(20),
+                  bottomLeft: Radius.circular(20),
                 ),
               ),
             ),
-            ListTile(
-              leading: Icon(Icons.login),
-              title: Text("Login"),
+          ),
+          SizedBox(height: 5),
+          SizedBox(height: 10),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.lightBlueAccent, // Playful color
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.blue.withOpacity(0.5), // Shadow color
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 2),
+                ),
+              ],
+            ),
+            child: ListTile(
+              leading: Icon(Icons.login, color: Colors.white), // Icon color
+              title: Text(
+                "Login",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white, // Text color
+                ),
+              ),
               onTap: () {
                 Navigator.pushNamed(context, Login.routeName);
               },
             ),
-            ListTile(
-              leading: Icon(Icons.attach_money),
-              title: Text("Product"),
+          ),
+          SizedBox(height: 10),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.orangeAccent, // Playful color
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.orange.withOpacity(0.5), // Shadow color
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 2),
+                ),
+              ],
+            ),
+            child: ListTile(
+              leading:
+                  Icon(Icons.attach_money, color: Colors.white), // Icon color
+              title: Text(
+                "Product",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white, // Text color
+                ),
+              ),
               onTap: () {
                 Navigator.pushNamed(context, Home.routeName);
               },
             ),
-            ListTile(
-              leading: Icon(Icons.trolley),
-              title: Text("cart"),
+          ),
+          SizedBox(height: 10),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.greenAccent, // Playful color
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.green.withOpacity(0.5), // Shadow color
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 2),
+                ),
+              ],
+            ),
+            child: ListTile(
+              leading:
+                  Icon(Icons.shopping_cart, color: Colors.white), // Icon color
+              title: Text(
+                "Cart",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white, // Text color
+                ),
+              ),
               onTap: () {
                 Navigator.pushNamed(context, Cartpage.routeName);
               },
-            )
-          ]),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

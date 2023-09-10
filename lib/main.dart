@@ -15,7 +15,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp( 
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'User CRUD',
       initialRoute: '/',
@@ -26,9 +26,7 @@ class MainApp extends StatelessWidget {
         '/cart': (context) => const Cartpage(),
         '/receipt': (context) => const Receipt(),
         '/success': (context) => const Successpage(),
-
-      },  
+      },
     );
   }
 }
-
